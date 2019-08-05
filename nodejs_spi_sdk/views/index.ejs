@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>test</title>
+  <script src="./js/jq.js"></script>
+  <style>
+    input{
+      width: 300px;
+      height: 25px;
+      line-height: 25px;
+    }
+    .test-page{
+      margin-top: 20px;
+      border-top: 1px solid #000;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>新建账号测试</h2>
+  <button class="new-account">新建</button>
+  <ul id="account-rows">
+    
+  </ul>
+  <h2>转账测试</h2>
+  <div>
+    <ul>
+      <li>
+        <h3>转账用户</h3>
+        <div>
+          <label for="">地址：</label><input id="u-address" type="text" value="znnsshTWEeRd5Q7rhqZS1C9rH8attnC8rU">
+        </div>
+        <div>
+          <label for="">私钥：</label><input id="u-secret" type="text" value="xh9WuMFatd9DG3v6T4SiFJnEHzCRL">
+        </div>
+      </li>
+      <li>
+        <h3>接受转账用户</h3>
+        <div>
+            <label for="">地址：</label><input id="address" type="text" value="zN6NM2oz78RqbGXTibwNEfm1srMNsc4Z1o">
+          </div>
+      </li>
+      <li>
+        <h3>数量</h3>
+        <div>
+            <label for="">数量：</label><input id="amount" type="text" value="1">
+          </div>
+      </li>
+      <li>
+        <h3>接受转账用户</h3>
+        <div>
+            <label for="">币种：</label>
+            <select name="" id="currency">
+                <option value="BTD">BTD</option>
+                <option value="HDT">HDT</option>
+            </select>
+          </div>
+      </li>
+      <li>
+        <h3>消息</h3>
+        <div>
+            <label for="">消息内容：</label><input id="msg" type="text" value="">
+          </div>
+        <div>
+            <label for="">消息类型：</label><input id="msg-type" type="text" value="">
+            </div>
+      </li>
+    </ul>
+  </div>
+  <br />
+  <br><button id="setTInfo">提交</button>
+  <br>
+  <div class="test-page">
+      <h2>数据分页测试</h2>
+      <ol id="rows">
+        
+      </ol>
+      <button id="next">下一页</button>
+  </div>
+  <script>
+  $('#setTInfo').click(function() {
+    $.ajax({
+      url: '/transfer',
+      data: JSON.stringify({
+        user: {
+          secret: $('#u-secret').val(),
+          address: $('#u-address').val()
+        },
+        address: $('#address').val(),
+        amount: $('#amount').val(),
+        currency: $('#currency').val(),
+        msg: $('#msg').val(),
+        msgType: $('#msg-type').val()
+      }),
+      contentType: 'application/json',
+      method: 'POST',
+      success: function(){
+        
+      }
+    }) 
+  })
+
+  let marker = {}
+  let getPage = () => {
+    $.ajax({
+      url: '/get-transaction-list',
+      data: JSON.stringify({
+        address: 'z96km7xeC13B9jFxkEvc6nq4LoWs6P4Bpg',
+        ledger: marker.ledger || undefined,
+        seq: marker.seq,
+        pageSize: 1
+      }),
+      contentType: 'application/json',
+      method: 'POST',
+      success: function(data){
+        try{
+          let rows = data.data.rows;
+          let node = ''
+          rows.map(function(row){
+            node += '<li>从地址'+row.fromAddr+'转'+row.amount+'个'+row.currency+'到地址'+row.toAddr+'备注：'+JSON.stringify(row.msg)+'</li>'
+          });
+          $('#rows').append(node);
+          if(data.data.marker){
+            marker = data.data.marker
+          }else{
+            marker = {}
+          }
+          console.log(marker)
+        }catch(e){
+          alert('获取数据失败')
+        }
+      } 
+    }) 
+  }
+  getPage()
+  $('#next').click(function(){
+    if(!marker.ledger) return alert('没有下一页');
+    getPage();
+  });
+
+  $('.new-account').click(function(){
+    $.ajax({
+      url: '/new-account',
+      data: JSON.stringify({}),
+      contentType: 'application/json',
+      method: 'POST',
+      success: function(data){
+        try{
+          let row = data;
+          $('#account-rows').append('<li>'+row.address+'</li>');
+        }catch(e){
+          alert('获取数据失败')
+        }
+      } 
+    }) 
+  });
+  
+  
+   
+  </script>
+</body>
+</html>
