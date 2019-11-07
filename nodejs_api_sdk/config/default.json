@@ -1,0 +1,12 @@
+{
+  "port": "8081",
+  "chain-url": "ws://192.168.90.52",
+  "chain-base-url": "http://192.168.90.52",
+  "issuer": {
+    "address": "XXX"
+  },
+  "activation-account": {
+    "secret": "XXX",
+    "address": "XXX"
+  }
+}

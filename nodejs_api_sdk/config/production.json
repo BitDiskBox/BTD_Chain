@@ -1,0 +1,12 @@
+{
+  "port": "3000",
+  "chain-url": "ws://127.0.0.1",
+  "chain-base-url": "http://127.0.0.1",
+  "issuer": {
+    "address": "XXX"
+  },
+  "activation-account": {
+    "secret": "XXX",
+    "address": "XXX"
+  }
+}
