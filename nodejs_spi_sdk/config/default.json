@@ -1,12 +1,12 @@
 {
   "port": "8081",
-  "chain-url": "ws://192.168.90.52:6206",
-  "chain-base-url": "http://192.168.90.52:5205",
+  "chain-url": "ws://192.168.90.52",
+  "chain-base-url": "http://192.168.90.52",
   "issuer": {
-    "address": "zPCNUvT6fsCA97nMSfi6ZMrT2uxDivCDek"
+    "address": "XXX"
   },
   "activation-account": {
-    "secret": "xpr63sUBCLkuS3KL1pUmgLTdjNmMN",
-    "address": "zhFb7AJKKKCWWHoEy3rhV3mjJQqtTDLeuo"
+    "secret": "XXX",
+    "address": "XXX"
   }
 }
