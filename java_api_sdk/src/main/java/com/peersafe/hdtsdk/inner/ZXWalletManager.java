@@ -105,7 +105,7 @@ public class ZXWalletManager {
     public List<String> mReceiveListWalletAddrs;
     /* access modifiers changed from: private */
     public String mTransferFee = BuildConfig.FLAVOR;
-    private static final String TOTAL_BALANCE = "xnXDZjucb246nzsb4YGD2AqvxztHf";
+    private static final String TOTAL_BALANCE = "xxx";
 
     private ZXWalletManager() {
     }
