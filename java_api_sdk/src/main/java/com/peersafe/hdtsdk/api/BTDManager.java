@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BTDManager implements ConnectDelegate {
-    public static final String CHAIN_SQL_NODE_ADDR = "ws://btnn.bitdisk.io:7006";
-    public static final String ISSUE_ADDR = "zJHhQ92GPEfnejJtLs5TRZR17sxaqDV8iT";
+    public static final String CHAIN_SQL_NODE_ADDR = "xxx";
+    public static final String ISSUE_ADDR = "xxx";
     public static final String TAG = BTDManager.class.getSimpleName();
     private boolean isSdkConnected;
     private HDTSdkApi mHdtSdkApi;
